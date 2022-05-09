@@ -3,6 +3,7 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userMessageState, userRoomState, messageListState, userInfoState } from "../../atom/Detail";
 import { uid } from "uid/single";
+import { RiSendPlaneFill } from "react-icons/ri";
 
 export default function BottomBar({ socket }) {
   const [userMessage, setUserMessage] = useRecoilState(userMessageState);
@@ -13,7 +14,8 @@ export default function BottomBar({ socket }) {
     setUserMessage(e.target.value);
   };
 
-  const sendMessage = async () => {
+  const sendMessage = async (e) => {
+    e.preventDefault();
     if (userMessage !== "") {
       const messageData = {
         id: String(uid(50)),
@@ -31,10 +33,12 @@ export default function BottomBar({ socket }) {
 
   return (
     <div className="bottom-bar">
-      <button className="bg-slate-300 w-14 h-full" onClick={sendMessage}>
-        SEND
-      </button>
-      <input onChange={messageHandler} type="text" value={userMessage} placeholder="Enter message..." className="bottom-bar-input" />
+      <form onSubmit={sendMessage} className="flex w-full mr-3">
+        <input onChange={messageHandler} type="text" value={userMessage} placeholder="Enter message..." className="bottom-bar-input" />
+        <button className="w-5" type="submit">
+          <RiSendPlaneFill size={25} className="text-gray-400" />
+        </button>
+      </form>
     </div>
   );
 }

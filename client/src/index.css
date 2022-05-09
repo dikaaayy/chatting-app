@@ -6,8 +6,8 @@
   .sidebar-icon {
     @apply relative flex items-center justify-center 
         h-12 w-12 mt-2 mb-2 mx-auto  
-      bg-gray-400 hover:bg-green-600 dark:bg-gray-800 
-      text-green-500 hover:text-white
+      bg-gray-400 hover:bg-[#596fdb] dark:bg-gray-800 
+      text-gray-500 hover:text-white
         hover:rounded-xl rounded-3xl
         transition-all duration-300 ease-linear
         cursor-pointer shadow-lg;
@@ -56,8 +56,8 @@
 
   .search {
     @apply w-1/5 flex items-center justify-start 
-        bg-gray-400 dark:bg-gray-600
-        text-gray-500
+        bg-gray-400 dark:bg-discordBg-sideBar
+        text-gray-400
         px-2 h-9 ml-0 mr-0 
         rounded-md shadow-md
         transition duration-300 ease-in-out;
@@ -66,7 +66,7 @@
   .search-input {
     @apply w-full font-sans font-semibold
         bg-transparent outline-none 
-        text-gray-500  placeholder-gray-500
+        text-discordText-lightGray  placeholder-gray-500
         pl-1 rounded;
   }
 
@@ -79,10 +79,7 @@
   }
 
   .content-list {
-    @apply flex flex-col items-center 
-        h-full w-full 
-        mt-0 ml-0 mx-auto px-0 pb-12 
-        overflow-y-scroll;
+    @apply flex flex-col items-center h-full w-full pb-12 overflow-y-scroll;
   }
 
   .post {
@@ -136,15 +133,12 @@
 
   .bottom-bar-input {
     @apply font-semibold w-full
-        bg-transparent outline-none 
-        ml-0 mr-auto
-        text-gray-500  dark:text-gray-400 placeholder-gray-500
-        cursor-text;
+        bg-transparent outline-none ml-0 mr-auto text-gray-500  dark:text-gray-400 placeholder-gray-500 cursor-text;
   }
 
   .channel-bar {
     @apply w-[15%] min-w-max h-screen ml-[4rem] bg-gray-200 dark:bg-discordBg-channelBar
-         overflow-y-scroll scrollbar-hide;
+         overflow-y-scroll;
   }
 
   .channel-container {
@@ -197,4 +191,8 @@
         hover:text-pink-500 dark:hover:text-gray-500
         cursor-pointer;
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
