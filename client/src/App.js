@@ -1,15 +1,10 @@
-import Channelbar from "./components/ChannelBar/ChannelBar";
-import MainContainer from "./components/MainContainer/MainContainer";
-import SideBar from "./components/Sidebar/SideBar";
+import Landing from "./components/Landing";
+import React from "react";
 
-function App() {
+export default function App() {
   return (
-    <div className="flex">
-      <SideBar />
-      <Channelbar />
-      <MainContainer />
+    <div className="flex  w-screen h-screen bg-[#3d62e7] items-center justify-center">
+      <Landing />
     </div>
   );
 }
-
-export default App;
