@@ -6,7 +6,7 @@ const SideBar = () => {
   return (
     <div
       className="fixed top-0 left-0 h-screen w-[8vh] flex flex-col
-                  bg-white dark:bg-gray-900 shadow-lg"
+                  bg-white dark:bg-gray-900 z-20 shadow-lg"
     >
       <SideBarIcon icon={<FaFire size="28" />} />
       <hr className="sidebar-hr" />

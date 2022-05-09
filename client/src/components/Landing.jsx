@@ -5,12 +5,14 @@ import SideBar from "./Sidebar/SideBar";
 import ReCAPTCHA from "react-google-recaptcha";
 import io from "socket.io-client";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userNameState, userRoomState } from "../atom/Detail";
+import { userInfoState, userRoomState } from "../atom/Detail";
 
 const socket = io.connect("http://localhost:3000/");
+const rand = Math.round(Math.random() * 100);
 
 export default function Landing() {
-  const [name, setName] = useRecoilState(userNameState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [name, setName] = useState("");
   const [isNameFilled, setIsNameFilled] = useState(false);
   const userRoom = useRecoilValue(userRoomState);
 
@@ -23,6 +25,10 @@ export default function Landing() {
       return false;
     }
     socket.emit("join_room", userRoom);
+    setUserInfo({
+      name,
+      image_url: `https://avatars.dicebear.com/api/open-peeps/${rand}.svg`,
+    });
     setIsNameFilled(true);
   };
 

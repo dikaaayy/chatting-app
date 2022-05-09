@@ -1,12 +1,13 @@
 import TopNavigation from "../TopNavigation/TopNavigation";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import BottomBar from "./BottomBar";
 import Message from "./Message";
-import { useRecoilState } from "recoil";
-import { messageListState } from "../../atom/Detail";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { messageListState, userInfoState } from "../../atom/Detail";
 
 export default function MainContainer({ socket }) {
   const [messageList, setMessageList] = useRecoilState(messageListState);
+  const userInfo = useRecoilValue(userInfoState);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
@@ -21,7 +22,7 @@ export default function MainContainer({ socket }) {
       <div className="content-list scrollbar-hide">
         <Message username="Leon" timestamp="one week ago" message={`Lorem ipsum dolor. `} />
         {messageList.map((message) => {
-          return <Message key={message.id} username={message.author} timestamp={message.time} message={message.message} />;
+          return <Message key={message.id} username={message.sender_name} timestamp={message.time} message={message.message} image_url={userInfo.image_url} />;
         })}
       </div>
       <div className="flex justify-center absolute left-0 bottom-0 w-full h-16 items-center bg-gradient-to-t from-gray-800 to-transparent">

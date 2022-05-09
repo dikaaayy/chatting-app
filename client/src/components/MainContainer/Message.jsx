@@ -1,14 +1,10 @@
 import React from "react";
-import { useRecoilValue } from "recoil";
-import { userNameState } from "../../atom/Detail";
 
-export default function Message({ username, timestamp, message }) {
-  const userName = useRecoilValue(userNameState);
-  const seed = Math.round(Math.random() * 100);
+export default function Message({ image_url, username, timestamp, message }) {
   return (
     <div className="w-full flex items-start justify-evenly py-4 pr-2 gap-x-2">
       <div className="ml-2">
-        <img src={`https://avatars.dicebear.com/api/open-peeps/${seed}.svg`} alt="" className="avatar w-12" />
+        <img src={image_url} alt="" className="avatar w-12" />
       </div>
 
       <div className="w-[95%] flex flex-col justify-between">
