@@ -28,10 +28,7 @@
 
   .top-navigation {
     @apply flex flex-row items-center justify-evenly 
-        bg-gray-300 dark:bg-gray-700 bg-opacity-90 
-        w-full h-16 
-        m-0 
-        shadow-lg;
+        bg-gray-300 dark:bg-discordBg-chatContainer w-full h-[7.5vh] border-b-2 border-discordBg-chatBorderColor;
   }
 
   .top-navigation-icon {
@@ -75,7 +72,7 @@
 
   .content-container {
     @apply flex flex-col 
-        bg-gray-300 dark:bg-gray-700
+        bg-gray-300 dark:bg-discordBg-chatContainer
         m-0 
         h-screen w-full
         overflow-hidden relative;
@@ -134,7 +131,7 @@
   }
 
   .bottom-bar {
-    @apply flex flex-row items-center justify-between relative rounded-lg w-[97%] shadow-lg bg-gray-400 dark:bg-gray-600 px-2 h-12;
+    @apply flex flex-row items-center justify-between relative rounded-lg w-[97%] shadow-lg bg-gray-400 dark:bg-discordBg-textInputContainer px-2 h-12;
   }
 
   .bottom-bar-input {
@@ -146,21 +143,21 @@
   }
 
   .channel-bar {
-    @apply w-[15%] min-w-max h-screen ml-[4rem] bg-gray-200 dark:bg-gray-800
+    @apply w-[15%] min-w-max h-screen ml-[4rem] bg-gray-200 dark:bg-discordBg-channelBar
          overflow-y-scroll scrollbar-hide;
   }
 
   .channel-container {
     @apply flex flex-col items-center justify-start 
-        p-1 pl-2;
+        p-1 pl-2 pt-4;
   }
 
   .channel-block {
-    @apply flex items-center justify-center h-16 pl-2 shadow-lg;
+    @apply flex items-center justify-center h-[7vh] pl-2 border-b-2 border-discordBg-channelBorderColor;
   }
 
   .channel-block-text {
-    @apply text-lg tracking-wider font-bold 
+    @apply text-lg tracking-wider font-semibold 
         text-gray-600 dark:text-gray-400 
         mr-auto ml-4 my-auto align-middle;
   }

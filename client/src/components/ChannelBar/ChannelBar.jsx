@@ -18,7 +18,7 @@ const ChannelBar = () => {
         <Dropdown header="Q&A" selections={questions} />
         <Dropdown header="Random" selections={random} />
       </div>
-      <div className="w-full pl-3 min-h-max h-[7%] bottom-0 bg-gray-600 absolute flex gap-x-3 items-center">
+      <div className="w-full pl-3 min-h-max h-[7%] bottom-0 bg-discordBg-userBar absolute flex gap-x-3 items-center">
         <img className="w-10 h-10 rounded-full bg-white" src={userInfo.image_url} alt={`${userInfo.name}-image`} />
         <p className="font-semibold text-white">{userInfo.name}</p>
       </div>

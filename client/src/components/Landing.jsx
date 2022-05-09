@@ -49,7 +49,7 @@ export default function Landing() {
             <input className="pl-2 py-2 outline-none rounded bg-[#1b1b1b]" type="text" placeholder="Set Your Name" onChange={nameHandler} value={name} />
           </div>
           {/*<ReCAPTCHA sitekey="process.env.SITE_KEY" /> */}
-          <button className={`px-3 py-2 bg-[#3d62e7] font-semibold transition rounded-md hover:bg-[#3555c7] disabled:bg-black`} type="submit">
+          <button className={`px-3 py-2 bg-discordPurple font-semibold transition rounded-md hover:bg-[#687fd1] disabled:bg-black`} type="submit">
             Enter
           </button>
         </form>

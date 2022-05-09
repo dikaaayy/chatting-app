@@ -13,6 +13,22 @@ module.exports = {
           200: "#ebedef",
           100: "#f2f3f5",
         },
+        discordBg: {
+          sideBar: "#202225",
+          userBar: "#292B2F",
+          channelBar: "#2E3036",
+          channelContainer: "#4F545C",
+          chatContainer: "#37393F",
+          textInputContainer: "#40444B",
+          chatBorderColor: "#303239",
+          channelBorderColor: "#222327",
+        },
+        discordText: {
+          channelText: "#8E9297",
+          inputText: "#DCDDDE",
+          lightGray: "#B9BBBE",
+        },
+        discordPurple: "#7289da",
       },
       spacing: {
         88: "22rem",
