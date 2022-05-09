@@ -28,7 +28,7 @@ module.exports = {
           inputText: "#DCDDDE",
           lightGray: "#B9BBBE",
         },
-        discordPurple: "#7289da",
+        discordPurple: "#596fdb",
       },
       spacing: {
         88: "22rem",

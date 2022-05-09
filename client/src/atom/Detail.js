@@ -8,6 +8,11 @@ export const userInfoState = atom({
   },
 });
 
+export const currentUserState = atom({
+  key: "currentUserState",
+  default: [],
+});
+
 export const userRoomState = atom({
   key: "userRoomState",
   default: "1",
