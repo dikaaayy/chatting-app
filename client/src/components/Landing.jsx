@@ -5,7 +5,7 @@ import SideBar from "./Sidebar/SideBar";
 import ReCAPTCHA from "react-google-recaptcha";
 import io from "socket.io-client";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userInfoState, userRoomState } from "../atom/Detail";
+import { userInfoState } from "../atom/Detail";
 
 const socket = io.connect("http://localhost:3000/");
 const rand = Math.floor(Math.random() * 10);
@@ -13,17 +13,19 @@ const rand = Math.floor(Math.random() * 10);
 export default function Landing() {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [name, setName] = useState("");
-  const [isNameFilled, setIsNameFilled] = useState(false);
-  const userRoom = useRecoilValue(userRoomState);
+  const [room, setRoom] = useState("");
+  const [showScreen, setShowScreen] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
-  const captchaHandler = (value) => {
-    console.log(value);
+  const captchaHandler = () => {
     setIsVerified(true);
   };
 
   const nameHandler = (e) => {
     setName(e.target.value);
+  };
+  const roomHandler = (e) => {
+    setRoom(e.target.value);
   };
 
   const submitHandler = (e) => {
@@ -34,15 +36,16 @@ export default function Landing() {
     if (!isVerified) {
       return;
     }
-    socket.emit("join_room", userRoom);
+    socket.emit("join_room", room);
     setUserInfo({
       name,
       image_url: `https://avatars.dicebear.com/api/open-peeps/${rand}.svg`,
+      user_room: room,
     });
-    setIsNameFilled(true);
+    setShowScreen(true);
   };
 
-  if (isNameFilled) {
+  if (showScreen) {
     return (
       <div className="flex w-screen">
         <SideBar />
@@ -57,6 +60,10 @@ export default function Landing() {
           <div className="flex flex-col gap-y-1">
             <label className="font-semibold text-[#B9BBBE]">Name:</label>
             <input className="pl-2 py-2 outline-none rounded bg-[#1b1b1b] placeholder:font-semibold" type="text" placeholder="Set Your Name" onChange={nameHandler} value={name} spellCheck="false" />
+          </div>
+          <div className="flex flex-col gap-y-1">
+            <label className="font-semibold text-[#B9BBBE]">Room:</label>
+            <input className="pl-2 py-2 outline-none rounded bg-[#1b1b1b] placeholder:font-semibold" type="text" placeholder="Default room is 1" onChange={roomHandler} value={room} spellCheck="false" />
           </div>
           <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={captchaHandler} />
           <button className={`px-3 py-2 bg-discordPurple font-semibold transition rounded-md hover:bg-opacity-95 disabled:bg-[#535353]`} disabled={!name || !isVerified} type="submit">

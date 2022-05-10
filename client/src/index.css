@@ -27,7 +27,7 @@
   }
 
   .top-navigation {
-    @apply flex flex-row items-center justify-evenly 
+    @apply flex items-center justify-between 
         bg-gray-300 dark:bg-discordBg-chatContainer w-full h-[7.5vh] border-b-2 border-discordBg-chatBorderColor;
   }
 
@@ -50,12 +50,12 @@
   }
 
   .search {
-    @apply w-1/5 flex items-center justify-start 
+    @apply w-[15%] flex items-center justify-between 
         bg-gray-400 dark:bg-discordBg-sideBar
         text-gray-400
-        px-2 h-9 ml-0 mr-0 
+        pl-2 h-9 ml-0 mr-0 
         rounded-md shadow-md
-        transition duration-300 ease-in-out;
+        transition duration-300 ease-in-out relative;
   }
 
   .search-input {

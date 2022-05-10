@@ -1,11 +1,11 @@
 import { BsGearFill } from "react-icons/bs";
 import { FaDiscord } from "react-icons/fa";
 import SideBarIcon from "./SideBarIcon";
-import { userRoomState } from "../../atom/Detail";
+import { userInfoState } from "../../atom/Detail";
 import { useRecoilValue } from "recoil";
 
 const SideBar = () => {
-  const userRoom = useRecoilValue(userRoomState);
+  const userInfo = useRecoilValue(userInfoState);
   // console.log(userRoom);
   return (
     <div
@@ -14,7 +14,7 @@ const SideBar = () => {
     >
       <SideBarIcon icon={<FaDiscord size="28" />} />
       <hr className="sidebar-hr" />
-      <SideBarIcon hoverText={userRoom} icon={userRoom} />
+      <SideBarIcon hoverText={userInfo.user_room} icon={userInfo.user_room} />
       <SideBarIcon icon={<BsGearFill size="22" />} />
     </div>
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import ChannelBlock from "./ChannelBlock";
 import Dropdown from "./Dropdown";
-import { userInfoState, userRoomState } from "../../atom/Detail";
+import { userInfoState } from "../../atom/Detail";
 import { useRecoilValue } from "recoil";
 import { uid } from "uid/single";
 import { MdMic, MdHeadphones } from "react-icons/md";
@@ -16,10 +16,9 @@ const SubChannel = [
 
 const ChannelBar = () => {
   const userInfo = useRecoilValue(userInfoState);
-  const userRoom = useRecoilValue(userRoomState);
   return (
     <div className="channel-bar">
-      <ChannelBlock roomName={userRoom} />
+      <ChannelBlock roomName={userInfo.user_room} />
       <div className="channel-container">
         <Dropdown header="Text Channel" selections={SubChannel} />
       </div>

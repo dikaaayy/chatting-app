@@ -5,17 +5,13 @@ export const userInfoState = atom({
   default: {
     name: "",
     image_url: "",
+    user_room: "1",
   },
 });
 
 export const currentUserState = atom({
   key: "currentUserState",
   default: [],
-});
-
-export const userRoomState = atom({
-  key: "userRoomState",
-  default: "1",
 });
 
 export const messageListState = atom({

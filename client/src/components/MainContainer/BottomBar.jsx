@@ -1,12 +1,11 @@
 import React from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { userMessageState, userRoomState, messageListState, userInfoState } from "../../atom/Detail";
+import { userMessageState, messageListState, userInfoState } from "../../atom/Detail";
 import { uid } from "uid/single";
 import { RiSendPlaneFill } from "react-icons/ri";
 
 export default function BottomBar({ socket }) {
   const [userMessage, setUserMessage] = useRecoilState(userMessageState);
-  const userRoom = useRecoilValue(userRoomState);
   const userInfo = useRecoilValue(userInfoState);
   const [messageList, setMessageList] = useRecoilState(messageListState);
   const messageHandler = (e) => {
@@ -18,7 +17,7 @@ export default function BottomBar({ socket }) {
     if (userMessage !== "") {
       const messageData = {
         id: String(uid(50)),
-        room: userRoom,
+        room: userInfo.user_room,
         sender_name: userInfo.name,
         message: userMessage,
         time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
