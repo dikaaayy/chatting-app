@@ -20,7 +20,7 @@ export default function MainContainer({ socket }) {
 
   return (
     <div className="content-container">
-      <TopNavigation />
+      <TopNavigation socket={socket} />
       {messageList.length === 0 ? (
         <div className="ml-10 flex flex-col justify-center h-screen select-none gap-y-2">
           <Blank />

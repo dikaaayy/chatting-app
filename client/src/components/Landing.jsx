@@ -15,7 +15,7 @@ export default function Landing() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [showScreen, setShowScreen] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState(true);
 
   const captchaHandler = () => {
     setIsVerified(true);
@@ -65,7 +65,7 @@ export default function Landing() {
             <label className="font-semibold text-[#B9BBBE]">Room:</label>
             <input className="pl-2 py-2 outline-none rounded bg-[#1b1b1b] placeholder:font-semibold" type="text" placeholder="Default room is 1" onChange={roomHandler} value={room} spellCheck="false" />
           </div>
-          <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={captchaHandler} />
+          {/*<ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={captchaHandler} />*/}
           <button className={`px-3 py-2 bg-discordPurple font-semibold transition rounded-md hover:bg-opacity-95 disabled:bg-[#535353]`} disabled={!name || !isVerified} type="submit">
             Enter
           </button>

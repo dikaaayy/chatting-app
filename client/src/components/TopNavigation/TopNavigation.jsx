@@ -1,14 +1,14 @@
-import { set } from "express/lib/application";
 import { useState } from "react";
 import { FaHashtag, FaRegBell, FaUserCircle } from "react-icons/fa";
 import { VscChromeClose } from "react-icons/vsc";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "../../atom/Detail";
+import { userInfoState, messageListState } from "../../atom/Detail";
 
-export default function TopNavigation() {
+export default function TopNavigation({ socket }) {
   const [isOpen, setIsOpen] = useState(false);
   const [newRoom, setNewRoom] = useState("");
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const [messageList, setMessageList] = useRecoilState(messageListState);
   const openHandler = () => {
     setIsOpen(true);
   };
@@ -19,14 +19,15 @@ export default function TopNavigation() {
 
   const changeRoom = (e) => {
     e.preventDefault();
+    socket.emit("change_room", userInfo.user_room, newRoom);
     setUserInfo((prevState) => {
       return {
         ...prevState,
         user_room: newRoom,
       };
     });
+    setMessageList([]);
     closeHandler();
-    console.log("room changed");
   };
   return (
     <div className="top-navigation select-none transition-all">
