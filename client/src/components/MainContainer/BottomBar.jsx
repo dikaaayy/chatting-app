@@ -34,7 +34,7 @@ export default function BottomBar({ socket }) {
   return (
     <div className="bottom-bar">
       <form onSubmit={sendMessage} className="flex w-full mr-3">
-        <input onChange={messageHandler} type="text" value={userMessage} placeholder="Enter message..." className="bottom-bar-input" />
+        <input onChange={messageHandler} type="text" value={userMessage} spellCheck="false" placeholder="Enter message..." className="bottom-bar-input" />
         <button className="w-5" type="submit">
           <RiSendPlaneFill size={25} className="text-gray-400" />
         </button>

@@ -8,7 +8,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfoState, userRoomState } from "../atom/Detail";
 
 const socket = io.connect("http://localhost:3000/");
-const rand = Math.round(Math.random() * 100);
+const rand = Math.floor(Math.random() * 10);
 
 export default function Landing() {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
@@ -43,7 +43,7 @@ export default function Landing() {
     );
   } else {
     return (
-      <div className="flex rounded-lg justify-center items-center flex-col h-[50vh] w-1/2 bg-[#2E3036] text-white">
+      <div className="flex rounded-lg justify-center items-center flex-col h-[50vh] min-w-max w-1/2 bg-[#2E3036] text-white">
         <form onSubmit={submitHandler} className="flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-1">
             <label className="font-semibold text-[#B9BBBE]">Name:</label>

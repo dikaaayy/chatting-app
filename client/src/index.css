@@ -6,7 +6,7 @@
   .sidebar-icon {
     @apply relative flex items-center justify-center 
         h-12 w-12 mt-2 mb-2 mx-auto  
-      bg-gray-400 hover:bg-[#596fdb] dark:bg-gray-800 
+      bg-gray-400 hover:bg-discordPurple dark:bg-gray-800 
       text-gray-500 hover:text-white
         hover:rounded-xl rounded-3xl
         transition-all duration-300 ease-linear
@@ -32,11 +32,7 @@
   }
 
   .top-navigation-icon {
-    @apply text-gray-500
-        mr-3 ml-4
-        transition duration-300 ease-in-out 
-        hover:text-pink-400 
-        cursor-pointer;
+    @apply text-gray-500 mr-3 ml-4 transition ease-in hover:text-white cursor-pointer;
   }
 
   .top-navigation-icon:first {
@@ -45,13 +41,12 @@
 
   .title-hashtag {
     @apply text-lg tracking-wider font-semibold text-gray-500 
-        ml-2 my-auto;
+        ml-2;
   }
 
   .title-text {
-    @apply text-xl text-gray-500 tracking-wider font-semibold text-opacity-80 
-        mr-auto ml-2 my-auto 
-        transition duration-300 ease-in-out;
+    @apply text-xl text-white tracking-wider font-semibold text-opacity-80 
+        mr-auto ml-1 transition duration-300 ease-in-out cursor-default;
   }
 
   .search {
@@ -137,13 +132,13 @@
   }
 
   .channel-bar {
-    @apply w-[15%] min-w-max h-screen ml-[4rem] bg-gray-200 dark:bg-discordBg-channelBar
-         overflow-y-scroll;
+    @apply sm:w-[13vw] w-[10vw] min-w-max h-screen bg-gray-200 dark:bg-discordBg-channelBar
+         overflow-y-scroll shadow-lg relative z-0 select-none hidden sm:block;
   }
 
   .channel-container {
     @apply flex flex-col items-center justify-start 
-        p-1 pl-2 pt-4;
+        p-1 pl-0 pt-4;
   }
 
   .channel-block {
@@ -152,7 +147,7 @@
 
   .channel-block-text {
     @apply text-lg tracking-wider font-semibold 
-        text-gray-600 dark:text-gray-400 
+        text-gray-600 dark:text-white 
         mr-auto ml-4 my-auto align-middle;
   }
 
@@ -178,10 +173,7 @@
   }
 
   .dropdown-selection {
-    @apply flex flex-row items-center justify-evenly
-        mt-1 mr-auto ml-2
-        transition duration-300 ease-in-out
-        cursor-pointer;
+    @apply flex flex-row items-center justify-evenly transition duration-300 ease-in-out cursor-pointer mt-2 ml-3 mr-1;
   }
 
   .dropdown-selection-text {
@@ -190,6 +182,9 @@
         transition duration-300 ease-in-out 
         hover:text-pink-500 dark:hover:text-gray-500
         cursor-pointer;
+  }
+  .current-user-container {
+    @apply w-full pl-5 min-h-max h-[7%] bottom-0 bg-discordBg-userBar absolute flex gap-x-3 items-center;
   }
 }
 
