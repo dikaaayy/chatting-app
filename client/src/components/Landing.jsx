@@ -15,6 +15,12 @@ export default function Landing() {
   const [name, setName] = useState("");
   const [isNameFilled, setIsNameFilled] = useState(false);
   const userRoom = useRecoilValue(userRoomState);
+  const [isVerified, setIsVerified] = useState(false);
+
+  const captchaHandler = (value) => {
+    console.log(value);
+    setIsVerified(true);
+  };
 
   const nameHandler = (e) => {
     setName(e.target.value);
@@ -23,7 +29,10 @@ export default function Landing() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (name === "") {
-      return false;
+      return;
+    }
+    if (!isVerified) {
+      return;
     }
     socket.emit("join_room", userRoom);
     setUserInfo({
@@ -49,8 +58,8 @@ export default function Landing() {
             <label className="font-semibold text-[#B9BBBE]">Name:</label>
             <input className="pl-2 py-2 outline-none rounded bg-[#1b1b1b] placeholder:font-semibold" type="text" placeholder="Set Your Name" onChange={nameHandler} value={name} spellCheck="false" />
           </div>
-          {/*<ReCAPTCHA sitekey="process.env.SITE_KEY" /> */}
-          <button className={`px-3 py-2 bg-discordPurple font-semibold transition rounded-md hover:bg-opacity-95 disabled:bg-black`} type="submit">
+          <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} onChange={captchaHandler} />
+          <button className={`px-3 py-2 bg-discordPurple font-semibold transition rounded-md hover:bg-opacity-95 disabled:bg-[#535353]`} disabled={!name || !isVerified} type="submit">
             Enter
           </button>
         </form>
