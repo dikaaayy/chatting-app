@@ -16,7 +16,7 @@ export default function MainContainer({ socket }) {
     });
   }, [messageList]);
 
-  console.log(messageList);
+  // console.log(messageList);
 
   return (
     <div className="content-container">

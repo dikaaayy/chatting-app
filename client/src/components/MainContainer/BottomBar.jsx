@@ -1,5 +1,4 @@
 import React from "react";
-import { BsPlusCircleFill } from "react-icons/bs";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userMessageState, userRoomState, messageListState, userInfoState } from "../../atom/Detail";
 import { uid } from "uid/single";
@@ -42,4 +41,3 @@ export default function BottomBar({ socket }) {
     </div>
   );
 }
-const PlusIcon = () => <BsPlusCircleFill size="22" className="text-green-500 dark:shadow-lg mx-2 dark:text-primary" />;

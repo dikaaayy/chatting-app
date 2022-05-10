@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import ChevronIcon from "./ChevronIcon";
-import TopicSelection from "./TopicSelection";
+import { BsHash } from "react-icons/bs";
 
 export default function Dropdown({ header, selections }) {
   const [expanded, setExpanded] = useState(true);
@@ -12,7 +12,16 @@ export default function Dropdown({ header, selections }) {
         <h5 className={expanded ? "dropdown-header-text-selected" : "dropdown-header-text"}>{header}</h5>
         <FaPlus size="12" className="text-accent text-opacity-80 my-auto ml-auto" />
       </div>
-      {expanded && selections && selections.map((selection) => <TopicSelection key={selection.id} selection={selection} />)}
+      {expanded &&
+        selections &&
+        selections.map((selection) => {
+          return (
+            <div key={selection.id} className="dropdown-selection">
+              <BsHash size="24" className="text-gray-400" />
+              <h5 className="dropdown-selection-text">{selection.name}</h5>
+            </div>
+          );
+        })}
     </div>
   );
 }

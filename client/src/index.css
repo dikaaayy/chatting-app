@@ -132,7 +132,7 @@
   }
 
   .channel-bar {
-    @apply sm:w-[13vw] w-[10vw] min-w-max h-screen bg-gray-200 dark:bg-discordBg-channelBar
+    @apply sm:w-[15vw] w-[10vw] min-w-max h-screen bg-gray-200 dark:bg-discordBg-channelBar
          overflow-y-scroll shadow-lg relative z-0 select-none hidden sm:block;
   }
 
@@ -184,7 +184,7 @@
         cursor-pointer;
   }
   .current-user-container {
-    @apply w-full pl-5 min-h-max h-[7%] bottom-0 bg-discordBg-userBar absolute flex gap-x-3 items-center;
+    @apply w-full min-h-max h-[6%] bottom-0 bg-discordBg-userBar absolute flex justify-between items-center;
   }
 }
 

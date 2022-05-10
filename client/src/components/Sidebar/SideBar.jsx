@@ -9,7 +9,7 @@ const SideBar = () => {
   // console.log(userRoom);
   return (
     <div
-      className="h-screen sm:w-[15vw] md:w-[12vw] lg:w-[7vw] 2xl:w-[5vw] flex-col
+      className="h-screen sm:w-[15vw] md:w-[12vw] lg:w-[7vw] 2xl:w-[4vw] flex-col
                   bg-white dark:bg-discordBg-sideBar z-20 shadow-lg hidden md:flex"
     >
       <SideBarIcon icon={<FaDiscord size="28" />} />
