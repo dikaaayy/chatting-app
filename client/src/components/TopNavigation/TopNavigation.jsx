@@ -3,6 +3,7 @@ import { FaHashtag, FaRegBell, FaUserCircle } from "react-icons/fa";
 import { VscChromeClose } from "react-icons/vsc";
 import { useRecoilState } from "recoil";
 import { userInfoState, messageListState } from "../../atom/Detail";
+import { uid } from "uid/single";
 
 export default function TopNavigation({ socket }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,16 +18,31 @@ export default function TopNavigation({ socket }) {
     setNewRoom("");
   };
 
-  const changeRoom = (e) => {
+  const newRoomText = {
+    id: String(uid(10)),
+    room: newRoom,
+    sender_name: "ADMIN",
+    message: `${userInfo.name} just joined from another room`,
+    time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+  };
+  const oldRoomText = {
+    id: String(uid(11)),
+    room: userInfo.user_room,
+    sender_name: "ADMIN",
+    message: `${userInfo.name} left to anoter room`,
+    time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+  };
+
+  const changeRoom = async (e) => {
     e.preventDefault();
-    socket.emit("change_room", userInfo.user_room, newRoom);
+    await socket.emit("change_room", userInfo.user_room, newRoom, oldRoomText, newRoomText);
     setUserInfo((prevState) => {
       return {
         ...prevState,
         user_room: newRoom,
       };
     });
-    setMessageList([]);
+    setMessageList("");
     closeHandler();
   };
   return (

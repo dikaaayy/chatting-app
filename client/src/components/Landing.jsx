@@ -6,6 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import io from "socket.io-client";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userInfoState } from "../atom/Detail";
+import { uid } from "uid/single";
 
 const socket = io.connect("http://localhost:3000/");
 const rand = Math.floor(Math.random() * 10);
@@ -28,7 +29,15 @@ export default function Landing() {
     setRoom(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const newUserNotification = {
+    id: String(uid(9)),
+    room,
+    sender_name: "ADMIN",
+    message: `${name} connected`,
+    time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+  };
+
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (name === "") {
       return;
@@ -36,13 +45,23 @@ export default function Landing() {
     if (!isVerified) {
       return;
     }
-    socket.emit("join_room", room);
-    setUserInfo({
-      name,
-      image_url: `https://avatars.dicebear.com/api/open-peeps/${rand}.svg`,
-      user_room: room,
-    });
-    setShowScreen(true);
+    if (room === "") {
+      socket.emit("join_room", 1, newUserNotification);
+      setUserInfo({
+        name,
+        image_url: `https://avatars.dicebear.com/api/open-peeps/${rand}.svg`,
+        user_room: 1,
+      });
+      setShowScreen(true);
+    } else {
+      socket.emit("join_room", room, newUserNotification);
+      setUserInfo({
+        name,
+        image_url: `https://avatars.dicebear.com/api/open-peeps/${rand}.svg`,
+        user_room: room,
+      });
+      setShowScreen(true);
+    }
   };
 
   if (showScreen) {
