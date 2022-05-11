@@ -46,10 +46,10 @@ export default function TopNavigation({ socket }) {
     closeHandler();
   };
   return (
-    <div className="top-navigation select-none transition-all">
+    <div className="top-navigation">
       <FaHashtag size="20" className="title-hashtag" />
       <h5 className="title-text">General</h5>
-      <button onClick={openHandler} className={`text-discordText-lightGray bg-discordBg-sideBar font-semibold px-3 py-2 rounded shadow-md ${isOpen ? "hidden" : "block"}`}>
+      <button onClick={openHandler} className={`text-discordText-lightGray text-sm md:text-base px-2 py-2 bg-discordBg-sideBar font-semibold md:px-3 md:py-2 rounded shadow-md ${isOpen ? "hidden" : "block"}`}>
         Change Room
       </button>
       <div className={`search ${!isOpen ? "hidden" : "flex"}`}>

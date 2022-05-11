@@ -28,7 +28,7 @@
 
   .top-navigation {
     @apply flex items-center justify-between 
-        bg-gray-300 dark:bg-discordBg-chatContainer w-full h-[7.5vh] border-b-2 border-discordBg-chatBorderColor;
+        bg-gray-300 dark:bg-discordBg-chatContainer w-full h-[7.5vh] border-b-2 border-discordBg-chatBorderColor select-none transition-all;
   }
 
   .top-navigation-icon {
@@ -50,7 +50,7 @@
   }
 
   .search {
-    @apply w-[15%] flex items-center justify-between 
+    @apply w-[25%] lg:w-[18%] xl:w-[15%] flex items-center justify-between 
         bg-gray-400 dark:bg-discordBg-sideBar
         text-gray-400
         pl-2 h-9 ml-0 mr-0 

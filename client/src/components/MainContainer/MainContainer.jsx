@@ -2,14 +2,13 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import React, { useEffect } from "react";
 import BottomBar from "./BottomBar";
 import Message from "./Message";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { messageListState, userInfoState } from "../../atom/Detail";
+import { useRecoilState } from "recoil";
+import { messageListState } from "../../atom/Detail";
 import Blank from "./Blank";
 import ScrollToBottom from "react-scroll-to-bottom";
 
 export default function MainContainer({ socket }) {
   const [messageList, setMessageList] = useRecoilState(messageListState);
-  const userInfo = useRecoilValue(userInfoState);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
@@ -17,8 +16,8 @@ export default function MainContainer({ socket }) {
     });
   }, [messageList]);
 
-  console.log(messageList);
-  console.log(userInfo);
+  // console.log(messageList);
+  // console.log(userInfo);
 
   return (
     <div className="content-container">

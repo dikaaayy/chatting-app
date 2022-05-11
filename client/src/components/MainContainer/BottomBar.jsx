@@ -3,7 +3,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { userMessageState, messageListState, userInfoState } from "../../atom/Detail";
 import { uid } from "uid/single";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { faker } from "@faker-js/faker";
 
 export default function BottomBar({ socket }) {
   const [userMessage, setUserMessage] = useRecoilState(userMessageState);
@@ -30,7 +29,6 @@ export default function BottomBar({ socket }) {
       setUserMessage("");
     }
   };
-  // console.log(faker.image.avatar());
 
   return (
     <div className="bottom-bar">

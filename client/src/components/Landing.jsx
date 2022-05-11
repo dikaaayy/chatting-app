@@ -9,7 +9,7 @@ import { userInfoState } from "../atom/Detail";
 import { uid } from "uid/single";
 
 const socket = io.connect("http://localhost:3000/");
-const rand = Math.floor(Math.random() * 10);
+const rand = Math.floor(Math.random() * 100);
 
 export default function Landing() {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
@@ -53,6 +53,8 @@ export default function Landing() {
         user_room: 1,
       });
       setShowScreen(true);
+      setName("");
+      setRoom("");
     } else {
       socket.emit("join_room", room, newUserNotification);
       setUserInfo({
@@ -61,6 +63,8 @@ export default function Landing() {
         user_room: room,
       });
       setShowScreen(true);
+      setName("");
+      setRoom("");
     }
   };
 
