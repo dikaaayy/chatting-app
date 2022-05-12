@@ -8,7 +8,7 @@ import { useRecoilState } from "recoil";
 import { userInfoState } from "../atom/Detail";
 import { uid } from "uid/single";
 
-const socket = io.connect("http://localhost:3000/");
+const socket = io.connect("https://chat-app-dika.herokuapp.com/");
 const rand = Math.floor(Math.random() * 100);
 
 export default function Landing() {
@@ -16,7 +16,7 @@ export default function Landing() {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   const [showScreen, setShowScreen] = useState(false);
-  const [isVerified, setIsVerified] = useState(true);
+  const [isVerified, setIsVerified] = useState(false);
 
   const captchaHandler = () => {
     setIsVerified(true);

@@ -4,7 +4,7 @@ This project is still on going
 
 ## Preview of the Web
 
-The Preview of the app is not ready yet😿
+The Preview of the app can be viewed [`here`](https://chat.andikay.me)
 
 ## How to use
 
