@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -21,6 +21,12 @@ io.on("connection", (socket) => {
     socket.join(room);
     socket.to(room).emit("receive_message", messageData);
     console.log(`User with ID: ${socket.id} joined room: ${room}`);
+  });
+
+  socket.on("user_dc", (room, text) => {
+    socket.to(room).emit("receive_message", text);
+    console.log(`user dc ${socket.id}`);
+    socket.disconnect(true);
   });
 
   socket.on("change_room", (prevRoom, nextRoom, prevRoomText, nextRoomText) => {

@@ -4,7 +4,7 @@ import MainContainer from "./MainContainer/MainContainer";
 import SideBar from "./Sidebar/SideBar";
 import ReCAPTCHA from "react-google-recaptcha";
 import io from "socket.io-client";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { userInfoState } from "../atom/Detail";
 import { uid } from "uid/single";
 

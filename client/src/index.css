@@ -62,7 +62,7 @@
     @apply w-full font-sans font-semibold
         bg-transparent outline-none 
         text-discordText-lightGray  placeholder-gray-500
-        pl-1 rounded;
+        pl-1 rounded lg:placeholder:text-base sm:placeholder:text-sm placeholder:text-xs;
   }
 
   .content-container {
