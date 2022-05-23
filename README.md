@@ -1,5 +1,9 @@
 # Chatting App
 
+<img src="images/chatMacbook.png" width="1000"/>
+<p align="center">
+  <img src="images/chatIphone12.svg" height="600"/>
+</p>
 This project is still on going
 
 ## Preview of the Web
