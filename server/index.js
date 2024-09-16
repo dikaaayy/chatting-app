@@ -53,30 +53,35 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", async ({ room, userId, userName, image_url }) => {
     socket.join(room);
-    console.log(`JOIN - User with ID: ${userId} and Socket ID: ${socket.id} joined room: ${room} TIME ${new Date().toISOString()}`);
+    console.log(`JOIN - User with ID: ${userId} and Socket ID: ${socket.id} joined room: ${room}`);
     try {
       // Ensure the user exists, or create them if they don't
-      await prisma.user.upsert({
+      const user = await prisma.user.upsert({
         where: { id: userId },
         update: {}, // No fields to update; just check if the user exists
         create: { id: userId, name: userName, image_url }, // Create the user if not found
       });
-  
+
       // Ensure the room exists, or create it if it doesn't
       const roomRecord = await prisma.room.upsert({
         where: { name: room },
         update: {}, // No update needed since it's just a check
         create: { name: room },
       });
-  
-      // Fetch previous messages for the room from the database
-      const messages = await prisma.message.findMany({
-        where: { roomId: roomRecord.id },
-        include: { user: true },
-        orderBy: { timestamp: 'asc' },
+      // Add the user to the room
+      await prisma.userRoom.upsert({
+        where: {
+          userId_roomId: {
+            userId: userId,
+            roomId: roomRecord.id,
+          },
+        },
+        update: {}, // No fields to update; just check if the relationship exists
+        create: {
+          user: { connect: { id: userId } },
+          room: { connect: { id: roomRecord.id } },
+        },
       });
-      // Emit previous messages to the client
-      socket.emit("previous_messages", messages);
     } catch (error) {
       console.error("Error handling room join:", error);
     }
