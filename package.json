@@ -15,6 +15,8 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "prisma": "^5.19.1",
-    "socket.io": "^4.5.0"
+    "socket.io": "^4.5.0",
+    "winston": "^3.14.2",
+    "winston-daily-rotate-file": "^5.0.0"
   }
 }

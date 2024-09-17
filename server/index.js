@@ -3,53 +3,35 @@ const app = express();
 const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
-const { PrismaClient } = require("@prisma/client");
+const messagesRouter = require('./routes/messages');
+const userRoomsRouter = require('./routes/userRooms');
+const prisma = require('./prisma')
 app.use(cors());
 
 const server = http.createServer(app);
 
+const allowedOrigins = ["http://172.17.0.3", "http://127.0.0.1", "http://192.168.0.30"];
+
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
   },
 });
 
-const prisma = new PrismaClient();
 
-  app.get("/api/messages/:room", async (req, res) => {
-    const { room } = req.params;
-    try {
-      const roomRecord = await prisma.room.findUnique({
-        where: { name: room },
-      });
-
-      if (!roomRecord) {
-        return res.status(404).json({ error: "Room not found" });
-      }
-
-      const messages = await prisma.message.findMany({
-        where: { roomId: roomRecord.id },
-        include: { user: true },
-        orderBy: { timestamp: 'asc' },
-      });
-
-      res.json(messages);
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  });
+app.use('/api/messages', messagesRouter);
+app.use('/api/userrooms', userRoomsRouter);
 
 io.on("connection", (socket) => {
   const clientIp = socket.handshake.address;
   console.log(`User Connected: ${socket.id} with IP ${clientIp}`);
-
-  // socket.on("join_room", (room) => {
-  //   socket.join(room);
-  //   // socket.to(room).emit("receive_message", messageData);
-  //   console.log(`User with ID: ${socket.id} joined room: ${room}`);
-  // });
 
   socket.on("join_room", async ({ room, userId, userName, image_url }) => {
     socket.join(room);
