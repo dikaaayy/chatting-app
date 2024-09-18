@@ -13,12 +13,14 @@ const logger = createLogger({
     logFormat
   ),
   transports: [
-    new transports.Console(),
-    new DailyRotateFile({
-      filename: 'logs/application-%DATE%.log',
+    new transports.Console({
+      silent: process.env.NODE_ENV === 'production' // Log to console only in development
+    }),
+    ...(process.env.NODE_ENV === 'production' ? [new DailyRotateFile({
+      filename: 'logs/chat-app-backend-%DATE%.log',
       datePattern: 'YYYY-MM-DD',
       maxFiles: '30d'
-    })
+    })] : [])
   ]
 });
 

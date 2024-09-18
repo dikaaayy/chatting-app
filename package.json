@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "start": "NODE_ENV=production pm2 start server/index.js --name chat-app-backend",
+    "restart": "pm2 stop chat-app-backend && pm2 start chat-app-backend",
+    "dev": "NODE_ENV=development nodemon server/index.js"
   },
   "keywords": [],
   "author": "",

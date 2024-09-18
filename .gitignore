@@ -4,3 +4,4 @@
 .env.staging
 
 /node_modules
+/logs

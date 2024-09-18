@@ -5,7 +5,9 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 const messagesRouter = require('./routes/messages');
 const userRoomsRouter = require('./routes/userRooms');
-const prisma = require('./prisma')
+const prisma = require('./prisma');
+const logger = require('./logger'); // Import the logger
+
 app.use(cors());
 
 const server = http.createServer(app);
@@ -25,17 +27,15 @@ const io = new Server(server, {
   },
 });
 
-
 app.use('/api/messages', messagesRouter);
 app.use('/api/userrooms', userRoomsRouter);
 
 io.on("connection", (socket) => {
-  const clientIp = socket.handshake.address;
-  console.log(`User Connected: ${socket.id} with IP ${clientIp}`);
+  logger.info(`CONNECTED - SOCKET: ${socket.id}`);
 
   socket.on("join_room", async ({ room, userId, userName, image_url }) => {
     socket.join(room);
-    console.log(`JOIN - User with ID: ${userId} and Socket ID: ${socket.id} joined room: ${room}`);
+    logger.info(`JOIN - UserID: ${userId} - SOCKET: ${socket.id} - ROOM: ${room}`);
     try {
       // Ensure the user exists, or create them if they don't
       const user = await prisma.user.upsert({
@@ -65,14 +65,13 @@ io.on("connection", (socket) => {
         },
       });
     } catch (error) {
-      console.error("Error handling room join:", error);
+      logger.error("Error handling room join:", error);
     }
   });
-  
 
   socket.on("user_dc", (room, text) => {
     socket.to(room).emit("receive_message", text);
-    console.log(`user dc ${socket.id}`);
+    logger.info(`DISCONNECT: ${socket.id}`);
     socket.disconnect(true);
   });
 
@@ -81,11 +80,11 @@ io.on("connection", (socket) => {
     socket.leave(prevRoom);
     socket.join(nextRoom);
     socket.to(nextRoom).emit("receive_message", nextRoomText);
-    console.log(`User with ID: ${socket.id} changed from room ${prevRoom} to room ${nextRoom}`);
+    logger.info(`User with ID: ${socket.id} changed from room ${prevRoom} to room ${nextRoom}`);
   });
 
   socket.on("send_message", async (data) => {
-    const { room, user, content} = data;
+    const { room, user, content } = data;
     try {
       // Save the message to the database
       const newMessage = await prisma.message.create({
@@ -96,15 +95,15 @@ io.on("connection", (socket) => {
         },
         include: { user: true, room: true },
       });
-      console.log(`new message FROM: ${user.name} AND ${socket.id} TIME ${new Date().toISOString()}`)
+      logger.info(`MESSAGE - SOCKET: ${socket.id}`);
       socket.to(room).emit("receive_message", newMessage);
     } catch (error) {
-      console.error("Error saving message:", error);
+      logger.error("Error saving message:", error);
     }
   });
 
   socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
+    logger.info(`DISCONNECT - SOCKET: ${socket.id}`);
   });
 });
 
@@ -112,6 +111,6 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-server.listen(process.env.PORT || 4000, () => {
-  console.log("SERVER RUNNING");
+server.listen(process.env.PORT || 4001, () => {
+  logger.info("SERVER RUNNING");
 });
